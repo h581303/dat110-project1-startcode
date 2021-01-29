@@ -5,8 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import no.hvl.dat110.TODO;
-
 public class Connection {
 
 	private DataOutputStream outStream; // for writing bytes to the underlying TCP connection
@@ -35,22 +33,42 @@ public class Connection {
 		// TODO
 		// encapsulate the data contained in the message and write to the output stream
 		// Hint: use the encapsulate method on the message
-		throw new UnsupportedOperationException(TODO.method());
+		
+		
+		try {
+			
+			outStream.write(message.encapsulate());
+			outStream.flush();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 
 	}
 
 	public Message receive() {
 
-		Message message;
-		byte[] recvbuf;
-
+		
+		byte[] recvbuf = new byte[128];
+		
+		try {
+			inStream.read(recvbuf,0,128);
+			
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		Message message = new Message();
+		
+		message.decapsulate(recvbuf);
+		
+		
 		// TODO
 		// read a segment (128 bytes) from the input stream and decapsulate into message
 		// Hint: create a new Message object and use the decapsulate method
-		
-		if (true) {
-			throw new RuntimeException("not yet implemented");
-		}
 
 		return message;
 
