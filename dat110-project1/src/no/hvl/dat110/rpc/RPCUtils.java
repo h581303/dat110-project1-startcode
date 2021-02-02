@@ -1,5 +1,6 @@
 package no.hvl.dat110.rpc;
 
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import no.hvl.dat110.TODO;
@@ -79,27 +80,43 @@ public class RPCUtils {
 
 	public static byte[] marshallInteger(byte rpcid, int x) {
 
-		byte[] encoded;
-
 		// TODO: marshall RPC identifier and string into byte array
-
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
+		
+		byte[] encoded = new byte[5];
+		encoded[0] = rpcid;
+		
+		//Converting the integer into an array of bytes
+		ByteBuffer b = ByteBuffer.allocate(4).putInt(x);
+		byte[] intAsByteArray = b.array();
+				
+		
+		//Puttin the array of bytes into the encoded array.
+		for(int i = 1; i<encoded.length;i++) {
+			encoded[i] = intAsByteArray[i-1];
 		}
+
+
 
 		return encoded;
 	}
 
 	public static int unmarshallInteger(byte[] data) {
 
-		int decoded;
-
 		// TODO: unmarshall integer contained in data
-
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
+		
+		
+		int decoded;
+		
+		//shifting the array one forward since we dont need the rpcid which sits at [0]
+		byte[] byteArray = new byte[data.length-1];
+		for(int i = 0; i < byteArray.length; i++) {
+			byteArray[i] = data[i+1];
 		}
-
+		
+		//Converting the array into Bytebuffer and further to an integer
+		ByteBuffer b = ByteBuffer.wrap(byteArray);
+		decoded = b.getInt();
+		
 		return decoded;
 
 	}
