@@ -34,56 +34,36 @@ public class Connection {
 		// encapsulate the data contained in the message and write to the output stream
 		// Hint: use the encapsulate method on the message
 		
-<<<<<<< HEAD
+
 		
 		try {
-			
+
 			outStream.write(message.encapsulate());
 			outStream.flush();
-			
+
 		} catch (IOException e) {
-			
-=======
-		message.encapsulate();
-		try {
-			outStream.write(message.getData());
-		} catch (IOException e) {
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
-			e.printStackTrace();
+
+			message.encapsulate();
+			try {
+				outStream.write(message.getData());
+			} catch (IOException e2) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
 
 	public Message receive() {
 
-<<<<<<< HEAD
-		
-		byte[] recvbuf = new byte[128];
-		
-		try {
-			inStream.read(recvbuf,0,128);
-			
-			
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		
-		Message message = new Message();
-		
-		message.decapsulate(recvbuf);
-		
-		
-=======
 		Message message = new Message();
 		byte[] recvbuf = new byte[128];
 
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
+
 		// TODO
 		// read a segment (128 bytes) from the input stream and decapsulate into message
 		// Hint: create a new Message object and use the decapsulate method
-<<<<<<< HEAD
-=======
+
 		
 		try {
 			inStream.read(recvbuf);
@@ -91,7 +71,7 @@ public class Connection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
+
 
 		message.decapsulate(recvbuf);
 		return message;

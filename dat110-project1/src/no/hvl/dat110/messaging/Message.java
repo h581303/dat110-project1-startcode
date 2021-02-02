@@ -4,13 +4,6 @@ public class Message {
 
     private byte[] payload;
 
-<<<<<<< HEAD
-	public Message(byte[] payload) {
-		if(payload.length <= 128) {
-			this.payload = payload;
-			} // TODO: check for length within boundary
-	}
-=======
     /**
      * Creates a new Message object with the given payload as payload
      *
@@ -21,7 +14,7 @@ public class Message {
         if (payload.length > 127) {
             throw new Exception("Payload to big");
         }
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
+
 
         this.payload = payload; // TODO: check for length within boundary
         // payload.length() <= 127
@@ -70,51 +63,6 @@ public class Message {
 		return this.payload;
 	}
 
-<<<<<<< HEAD
-	public byte[] encapsulate() {
-		
-		//Making the encoded array with the fixed size
-		
-		byte[] encoded = new byte[128];
-		
-		// TODO
-		// encapulate/encode the payload of this message in the
-		// encoded byte array according to message format
-		
-		
-		encoded[0] = (byte)payload.length;
-		
-		int i = 1;
-		
-		while(i <= payload.length) {
-			encoded[i] = payload[i-1];
-			
-			i++;
-		}
-
-		return encoded;
-		
-	}
-
-	public void decapsulate(byte[] received) {
-
-		// TODO
-		// decapsulate the data contained in the received byte array and store it 
-		// in the payload of this message
-		
-		byte[] buffer = new byte[received[0]];
-		
-		int i = 0;
-		
-		while (i < received[0]) {
-			
-			buffer[i] = received[i+1];
-			i++;
-		}
-		
-		payload = buffer; 
-		
-	}
 	
 	@Override
 	public String toString() {
@@ -127,6 +75,5 @@ public class Message {
 		
 		return outstr;
 	}
-=======
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
+
 }

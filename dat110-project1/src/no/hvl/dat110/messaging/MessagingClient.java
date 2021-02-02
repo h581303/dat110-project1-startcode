@@ -18,10 +18,11 @@ public class MessagingClient {
 	// connect to messaging server
 	public Connection connect() {
 
-		Socket clientSocket = null;
-<<<<<<< HEAD
-=======
+		// TODO
+		// create TCP socket for client and connection
+		// create connection object
 		
+		Socket clientSocket = null;
 		
 		try {
 			clientSocket = new Socket(server, port);
@@ -31,27 +32,7 @@ public class MessagingClient {
 		}
 		
 		Connection connection = new Connection(clientSocket);
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 
-		// TODO
-		// create TCP socket for client and connection
-		// create connection object
-		
-<<<<<<< HEAD
-		try {
-			clientSocket = new Socket(server, port);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-=======
-		
->>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
-
-		Connection connection = new Connection(clientSocket);
-		
 		return connection;
 	}
 }
