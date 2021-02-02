@@ -53,39 +53,35 @@ public class TestMessaging {
 
 		});
 
-		Thread client = new Thread() {
+		Thread client = new Thread(() -> {
 
-			public void run() {
+			try {
 
-				try {
+				System.out.println("Messaging client - start");
 
-					System.out.println("Messaging client - start");
+				MessagingClient client1 = new MessagingClient(MessageConfig.MESSAGINGHOST,
+						MessageConfig.MESSAGINGPORT);
 
-					MessagingClient client = new MessagingClient(MessageConfig.MESSAGINGHOST,
-							MessageConfig.MESSAGINGPORT);
+				Connection connection = client1.connect();
 
-					Connection connection = client.connect();
+				Message message1 = new Message(clientsent);
 
-					Message message1 = new Message(clientsent);
+				connection.send(message1);
 
-					connection.send(message1);
+				Message message2 = connection.receive();
 
-					Message message2 = connection.receive();
+				byte[] clientreceived = message2.getData();
 
-					byte[] clientreceived = message2.getData();
+				connection.close();
 
-					connection.close();
+				System.out.println("Messaging client - stop");
 
-					System.out.println("Messaging client - stop");
-
-					assertTrue(Arrays.equals(clientsent, clientreceived));
-				} catch (Exception e) {
-					e.printStackTrace();
-					failure = true;
-				}
+				assertTrue(Arrays.equals(clientsent, clientreceived));
+			} catch (Exception e) {
+				e.printStackTrace();
+				failure = true;
 			}
-
-		};
+		});
 
 		try {
 			server.start();
