@@ -106,9 +106,7 @@ public class RPCUtils {
 		
 		//shifting the array one forward since we dont need the rpcid which sits at [0]
 		byte[] byteArray = new byte[data.length-1];
-		for(int i = 0; i < byteArray.length; i++) {
-			byteArray[i] = data[i+1];
-		}
+		if (byteArray.length >= 0) System.arraycopy(data, 1, byteArray, 0, byteArray.length);
 		
 		//Converting the array into Bytebuffer and further to an integer
 		ByteBuffer b = ByteBuffer.wrap(byteArray);
