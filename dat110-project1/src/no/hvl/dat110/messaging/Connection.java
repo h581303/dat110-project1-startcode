@@ -44,56 +44,41 @@ public class Connection {
         }
     }
 
-        public Message receive () {
+    public Message receive() {
 
 
-            byte[] recvbuf = new byte[128];
+        byte[] recvbuf = new byte[128];
 
-            try {
-                inStream.read(recvbuf, 0, 128);
-
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
-
-            Message message = new Message();
-
-            message.decapsulate(recvbuf);
+        try {
+            inStream.read(recvbuf, 0, 128);
 
 
-            // TODO
-            // read a segment (128 bytes) from the input stream and decapsulate into message
-            // Hint: create a new Message object and use the decapsulate method
+        } catch (IOException e) {
 
-
-            try {
-                inStream.read(recvbuf);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            message.decapsulate(recvbuf);
-
-            return message;
-
+            e.printStackTrace();
         }
 
-        // close the connection by closing streams and the underlying socket
-        public void close () {
+        Message message = new Message();
 
-            try {
+        message.decapsulate(recvbuf);
 
-                outStream.close();
-                inStream.close();
+        return message;
 
-                socket.close();
-            } catch (IOException ex) {
+    }
 
-                System.out.println("Connection: " + ex.getMessage());
-                ex.printStackTrace();
-            }
+    // close the connection by closing streams and the underlying socket
+    public void close() {
+
+        try {
+
+            outStream.close();
+            inStream.close();
+
+            socket.close();
+        } catch (IOException ex) {
+
+            System.out.println("Connection: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
+}
