@@ -63,16 +63,16 @@ public class Message {
 		return this.payload;
 	}
 
-	
+
 	@Override
 	public String toString() {
-		
+
 		String outstr = "";
-		
+
 		for(byte b : payload) {
 			outstr = outstr + " " + b;
 		}
-		
+
 		return outstr;
 	}
 

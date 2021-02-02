@@ -30,9 +30,7 @@ public class MessagingClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Connection connection = new Connection(clientSocket);
 
-		return connection;
+		return new Connection(clientSocket);
 	}
 }

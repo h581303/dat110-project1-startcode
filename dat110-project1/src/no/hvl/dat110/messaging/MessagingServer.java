@@ -27,7 +27,7 @@ public class MessagingServer {
 		// TODO
 		// accept TCP connection on welcome socket and create messaging connection
 		
-		Socket connectionSocket = null;
+		Socket connectionSocket;
 		Connection connection = null;
 
 		
@@ -48,7 +48,6 @@ public class MessagingServer {
 	public void stop() {
 
 		if (welcomeSocket != null) {
-
 			try {
 				welcomeSocket.close();
 			} catch (IOException ex) {

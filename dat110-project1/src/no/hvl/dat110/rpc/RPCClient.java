@@ -19,17 +19,13 @@ public class RPCClient {
 	
 	public void connect() {
 		
-		// TODO: connect using the underlying messaging layer connection
-		
-	    throw new UnsupportedOperationException(TODO.method());
+		connection = msgclient.connect();
 			
 	}
 	
 	public void disconnect() {
 		
-		// TODO: disconnect/close the underlying messaging connection
-		
-		throw new UnsupportedOperationException(TODO.method());
+		connection.close();
 		
 	}
 	

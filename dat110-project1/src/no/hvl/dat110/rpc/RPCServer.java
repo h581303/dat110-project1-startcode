@@ -19,7 +19,7 @@ public class RPCServer {
 	public RPCServer(int port) {
 		
 		this.msgserver = new MessagingServer(port);
-		this.services = new HashMap<Integer,RPCImpl>();
+		this.services = new HashMap<>();
 		
 		// the stop RPC methods is built into the server
 		services.put((int)RPCCommon.RPIDSTOP,new RPCServerStopImpl());
