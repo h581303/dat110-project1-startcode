@@ -27,10 +27,10 @@ public class MessagingClient {
 		try {
 			clientSocket = new Socket(server, port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		assert clientSocket != null;
 		return new Connection(clientSocket);
 	}
 }
