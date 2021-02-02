@@ -1,6 +1,8 @@
 package no.hvl.dat110.rpc;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import no.hvl.dat110.TODO;
@@ -14,27 +16,38 @@ public class RPCUtils {
 	
 	public static byte[] marshallString(byte rpcid, String str) {
 
-		byte[] encoded;
-
 		// TODO: marshall RPC identifier and string into byte array
 
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
-		}
+		
+		//Creating a byteArray from the string using the CharsetClass
+		
+		Charset charset = StandardCharsets.ISO_8859_1;
+		byte[] stringByteArray = charset.encode(str).array();
+		byte[] encoded = new byte[stringByteArray.length+1];
 
+		encoded[0] = rpcid;
+
+		for(int i = 1; i<=stringByteArray.length; i++) {
+			encoded[i] = stringByteArray[i-1];
+		}
+		
 		return encoded;
 	}
 
 	public static String unmarshallString(byte[] data) {
 
-		String decoded;
-
 		// TODO: unmarshall String contained in data into decoded
+		
 
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
+						
+		byte[] byteArray = new byte[data.length-1];
+		
+		for(int i = 1; i<=byteArray.length; i++) {
+			byteArray[i-1] = data[i];
 		}
-
+		
+		String decoded = new String(byteArray);
+		
 		return decoded;
 	}
 

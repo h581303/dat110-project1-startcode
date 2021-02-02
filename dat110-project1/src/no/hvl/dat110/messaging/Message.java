@@ -8,10 +8,10 @@ public class Message {
      * Creates a new Message object with the given payload as payload
      *
      * @param payload The information that is going to be sent, which must be less than 128 bytes
-     * @throws Exception If the payload is over 127 bytes this get thrown
+     * @throws Exception If the payload is over 128 bytes this get thrown
      */
     public Message(byte[] payload) throws Exception {
-        if (payload.length > 127) {
+        if (payload.length > 128) {
             throw new Exception("Payload to big");
         }
 
