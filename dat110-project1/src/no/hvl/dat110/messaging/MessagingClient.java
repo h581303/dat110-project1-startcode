@@ -19,11 +19,25 @@ public class MessagingClient {
 	public Connection connect() {
 
 		Socket clientSocket = null;
+<<<<<<< HEAD
+=======
+		
+		
+		try {
+			clientSocket = new Socket(server, port);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Connection connection = new Connection(clientSocket);
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 
 		// TODO
 		// create TCP socket for client and connection
 		// create connection object
 		
+<<<<<<< HEAD
 		try {
 			clientSocket = new Socket(server, port);
 		} catch (UnknownHostException e) {
@@ -32,6 +46,9 @@ public class MessagingClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+=======
+		
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 
 		Connection connection = new Connection(clientSocket);
 		

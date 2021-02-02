@@ -34,6 +34,7 @@ public class Connection {
 		// encapsulate the data contained in the message and write to the output stream
 		// Hint: use the encapsulate method on the message
 		
+<<<<<<< HEAD
 		
 		try {
 			
@@ -42,6 +43,12 @@ public class Connection {
 			
 		} catch (IOException e) {
 			
+=======
+		message.encapsulate();
+		try {
+			outStream.write(message.getData());
+		} catch (IOException e) {
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 			e.printStackTrace();
 		}
 
@@ -49,6 +56,7 @@ public class Connection {
 
 	public Message receive() {
 
+<<<<<<< HEAD
 		
 		byte[] recvbuf = new byte[128];
 		
@@ -66,10 +74,26 @@ public class Connection {
 		message.decapsulate(recvbuf);
 		
 		
+=======
+		Message message = new Message();
+		byte[] recvbuf = new byte[128];
+
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 		// TODO
 		// read a segment (128 bytes) from the input stream and decapsulate into message
 		// Hint: create a new Message object and use the decapsulate method
+<<<<<<< HEAD
+=======
+		
+		try {
+			inStream.read(recvbuf);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 
+		message.decapsulate(recvbuf);
 		return message;
 
 	}

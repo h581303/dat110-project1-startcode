@@ -24,7 +24,9 @@ public class MessagingServer {
 	// accept an incoming connection from a client
 	public Connection accept() {
 
+		Socket connectionSocket = null;
 		Connection connection = null;
+<<<<<<< HEAD
 		
 		try {
 			Socket connectionSocket = welcomeSocket.accept();
@@ -36,9 +38,24 @@ public class MessagingServer {
 			
 		}
 
+=======
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 		// TODO
 		// accept TCP connection on welcome socket and create messaging connection
 
+<<<<<<< HEAD
+=======
+		try {
+			connectionSocket = welcomeSocket.accept();
+			connection = new Connection(connectionSocket);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+
+>>>>>>> branch 'master' of https://github.com/h581303/dat110-project1-startcode
 		return connection;
 
 	}
