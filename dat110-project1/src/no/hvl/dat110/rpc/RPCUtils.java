@@ -27,9 +27,7 @@ public class RPCUtils {
 
 		encoded[0] = rpcid;
 
-		for(int i = 1; i<=stringByteArray.length; i++) {
-			encoded[i] = stringByteArray[i-1];
-		}
+		System.arraycopy(stringByteArray, 0, encoded, 1, stringByteArray.length);
 		
 		return encoded;
 	}
@@ -37,18 +35,12 @@ public class RPCUtils {
 	public static String unmarshallString(byte[] data) {
 
 		// TODO: unmarshall String contained in data into decoded
-		
 
-						
 		byte[] byteArray = new byte[data.length-1];
-		
-		for(int i = 1; i<=byteArray.length; i++) {
-			byteArray[i-1] = data[i];
-		}
-		
-		String decoded = new String(byteArray);
-		
-		return decoded;
+
+		if (byteArray.length >= 0) System.arraycopy(data, 1, byteArray, 0, byteArray.length);
+
+		return new String(byteArray);
 	}
 
 	public static byte[] marshallVoid(byte rpcid) {
@@ -76,11 +68,7 @@ public class RPCUtils {
 
 		encoded[0] = rpcid;
 
-		if (b) {
-			encoded[1] = 1;
-		} else {
-			encoded[1] = 0;
-		}
+		encoded[1] = b ? (byte)1 : 0;
 
 		return encoded;
 	}
@@ -104,11 +92,7 @@ public class RPCUtils {
 				
 		
 		//Puttin the array of bytes into the encoded array.
-		for(int i = 1; i<encoded.length;i++) {
-			encoded[i] = intAsByteArray[i-1];
-		}
-
-
+		System.arraycopy(intAsByteArray, 0, encoded, 1, encoded.length - 1);
 
 		return encoded;
 	}
