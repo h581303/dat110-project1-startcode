@@ -26,35 +26,50 @@ public class RPCServer {
 	}
 	
 	public void run() {
-		
+
 		System.out.println("RPC SERVER RUN - Services: " + services.size());
-		
-		connection = msgserver.accept(); 
-		
+
+		connection = msgserver.accept();
+
 		System.out.println("RPC SERVER ACCEPTED");
-		
+
 		boolean stop = false;
-		
+
 		while (!stop) {
-	    
-		   int rpcid;
-		   
-		   // TODO
-		   // - receive message containing RPC request
-		   // - find the identifier for the RPC methods to invoke
-		   // - lookup the method to be invoked
-		   // - invoke the method
-		   // - send back message containing RPC reply
-			
-		   if (true) {
-			   throw new UnsupportedOperationException(TODO.method());
-		   }
-		   
-		   if (rpcid == RPCCommon.RPIDSTOP) {
-			   stop = true;
-		   }
+
+			int rpcid;
+
+			// TODO
+			// - receive message containing RPC request
+			// - find the identifier for the RPC methods to invoke
+			// - lookup the method to be invoked
+			// - invoke the method
+			// - send back message containing RPC reply
+
+			Message rec = connection.receive();
+
+			byte[] arr = rec.getData();
+
+			if (arr.length > 0) {
+				rpcid = arr[0];
+
+				if (rpcid == RPCCommon.RPIDSTOP) {
+					stop = true;
+					continue;
+				}
+
+				RPCImpl imp = services.get(rpcid);
+
+				byte[] response = imp.invoke(arr);
+
+				try {
+					connection.send(new Message(response));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-	
 	}
 	
 	public void register(int rpcid, RPCImpl impl) {

@@ -1,6 +1,5 @@
 package no.hvl.dat110.rpc;
 
-import no.hvl.dat110.TODO;
 import no.hvl.dat110.messaging.*;
 
 public class RPCClient {
@@ -21,7 +20,7 @@ public class RPCClient {
 		
 		// TODO: connect using the underlying messaging layer connection
 		
-	    throw new UnsupportedOperationException(TODO.method());
+		msgclient.connect();
 			
 	}
 	
@@ -29,13 +28,11 @@ public class RPCClient {
 		
 		// TODO: disconnect/close the underlying messaging connection
 		
-		throw new UnsupportedOperationException(TODO.method());
+		connection.close();
 		
 	}
 	
 	public byte[] call(byte[] rpcrequest) {
-		
-		byte[] rpcreply;
 		
 		/* TODO: 
 		
@@ -47,11 +44,18 @@ public class RPCClient {
 		
 		*/
 		
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
-		}
 		
-		return rpcreply;
+		try {
+			connection.send(new Message(rpcrequest));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Message msg = connection.receive();
+		
+		return msg.getData();
+		
 		
 	}
 

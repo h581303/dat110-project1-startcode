@@ -53,21 +53,13 @@ public class RPCUtils {
 
 	public static byte[] marshallVoid(byte rpcid) {
 
-		byte[] encoded;
-
-		// TODO: marshall RPC identifier in case of void type
-
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
-		}
-
-		return encoded;
+		return new byte[]{rpcid};
 
 	}
 
 	public static void unmarshallVoid(byte[] data) {
 
-		// TODO: unmarshall void type
+		
 	}
 
 	public static byte[] marshallBoolean(byte rpcid, boolean b) {
