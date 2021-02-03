@@ -7,17 +7,12 @@ public class Message {
     /**
      * Creates a new Message object with the given payload as payload
      *
-     * @param payload The information that is going to be sent, which must be less than 128 bytes
-     * @throws Exception If the payload is over 128 bytes this get thrown
+     * @param payload The information that is going to be sent, which must be less than 127 bytes
      */
-    public Message(byte[] payload) throws Exception {
-        if (payload.length > 128) {
-            throw new Exception("Payload to big");
-        }
+    public Message(byte[] payload) {
+        if (payload.length < 128) this.payload = payload;
 
-
-        this.payload = payload; // TODO: check for length within boundary
-        // payload.length() <= 127
+        else System.out.println("Payload too big");
     }
 
     public Message() {
@@ -54,26 +49,13 @@ public class Message {
         payload = buffer;
     }
 
-	/**
-	 * Returns the data contained in this message
-	 *
-	 * @return The payload
-	 */
-	public byte[] getData() {
-		return this.payload;
-	}
-
-
-	@Override
-	public String toString() {
-
-		String outstr = "";
-
-		for(byte b : payload) {
-			outstr = outstr + " " + b;
-		}
-
-		return outstr;
-	}
+    /**
+     * Returns the data contained in this message
+     *
+     * @return The payload
+     */
+    public byte[] getData() {
+        return this.payload;
+    }
 
 }
