@@ -9,7 +9,6 @@ public class RPCClient {
 	private Connection connection;
 	
 	public RPCClient(String server, int port) {
-	
 		msgclient = new MessagingClient(server,port);
 	}
 	
@@ -31,8 +30,6 @@ public class RPCClient {
 	
 	public byte[] call(byte[] rpcrequest) {
 		
-		byte[] rpcreply;
-		
 		/* TODO: 
 		
 		Make a remote call on the RPC server by sending the RPC request message
@@ -42,12 +39,12 @@ public class RPCClient {
 		rpctreply is the rpcreply to be unmarshalled by the client-stub
 		
 		*/
+
+		connection.send(new Message(rpcrequest));
+
+		Message msg = connection.receive();
 		
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
-		}
-		
-		return rpcreply;
+		return msg.getData();
 		
 	}
 
