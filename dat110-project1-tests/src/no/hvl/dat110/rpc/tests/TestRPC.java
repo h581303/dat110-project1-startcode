@@ -10,7 +10,7 @@ import no.hvl.dat110.rpc.RPCServerStopStub;
 
 public class TestRPC {
 
-	private static int PORT = 8080;
+	private static int PORT = 9090;
 	private static String SERVER = "localhost";
 
 	@Test
