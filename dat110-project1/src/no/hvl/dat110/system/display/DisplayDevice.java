@@ -14,10 +14,15 @@ public class DisplayDevice {
 		// TODO
 		// implement the operation of the display RPC server
 		// see how this is done for the sensor RPC server in SensorDevice
+		DisplayImpl display = new DisplayImpl();
 		
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
-		}
+		RPCServer displayserver = new RPCServer(Common.DISPLAYPORT);
+		
+		displayserver.register(1, display);
+		
+		displayserver.run();
+		
+		displayserver.stop();
 		
 		System.out.println("Display server stopping ...");
 		
