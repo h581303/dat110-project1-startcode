@@ -6,29 +6,42 @@ import no.hvl.dat110.messaging.MessagingServer;
 
 import java.util.HashMap;
 
+/**
+ * Defines a RPC server
+ *
+ * @author Sebastian Misje Jonassen
+ */
 public class RPCServer {
 
-    private MessagingServer msgserver;
+    private final MessagingServer MSG_SERVER;
     private Connection connection;
 
     // hashmap to register RPC methods which are required to implement RPCImpl
+    private final HashMap<Integer, RPCImpl> SERVICES;
 
-    private HashMap<Integer, RPCImpl> services;
-
+    /**
+     * Creates a new RPC server which is going to listen to the given socket
+     *
+     * @param port The port that the server is listening to
+     */
     public RPCServer(int port) {
 
-        this.msgserver = new MessagingServer(port);
-        this.services = new HashMap<>();
+        this.MSG_SERVER = new MessagingServer(port);
+        this.SERVICES = new HashMap<>();
 
         // the stop RPC methods is built into the server
-        services.put((int) RPCCommon.RPIDSTOP, new RPCServerStopImpl());
+        SERVICES.put((int) RPCCommon.RPIDSTOP, new RPCServerStopImpl());
     }
 
+    /**
+     * Starts the server and accepts an incoming connection
+     * Then listens for request and executes the corresponding service
+     */
     public void run() {
 
-        System.out.println("RPC SERVER RUN - Services: " + services.size());
+        System.out.println("RPC SERVER RUN - Services: " + SERVICES.size());
 
-        connection = msgserver.accept();
+        connection = MSG_SERVER.accept();
 
         System.out.println("RPC SERVER ACCEPTED");
 
@@ -45,34 +58,42 @@ public class RPCServer {
             // - invoke the method
             // - send back message containing RPC reply
 
-            Message rec = connection.receive();
+            Message req = connection.receive();
 
-            byte[] arr = rec.getData();
+            byte[] arr = req.getData();
 
-            if(arr.length > 0){
-				rpcid = arr[0];
+            if (arr.length > 0) {
+                rpcid = arr[0];
 
-				if (rpcid == RPCCommon.RPIDSTOP) {
-					stop = true;
-					continue;
-				}
+                if (rpcid == RPCCommon.RPIDSTOP) {
+                    stop = true;
+                    continue;
+                }
 
-				RPCImpl imp = services.get(rpcid);
+                RPCImpl imp = SERVICES.get(rpcid);
 
-				byte[] response = imp.invoke(arr);
+                byte[] response = imp.invoke(arr);
 
-				connection.send(new Message(response));
-			}
+                connection.send(new Message(response));
+            }
         }
     }
 
-    public void register(int rpcid, RPCImpl impl) {
-        services.put(rpcid, impl);
+    /**
+     * Registers a new service
+     *
+     * @param rpcId The RPC id
+     * @param impl  The service
+     */
+    public void register(int rpcId, RPCImpl impl) {
+        SERVICES.put(rpcId, impl);
     }
 
+    /**
+     * Stops the server
+     */
     public void stop() {
         connection.close();
-        msgserver.stop();
-
+        MSG_SERVER.stop();
     }
 }

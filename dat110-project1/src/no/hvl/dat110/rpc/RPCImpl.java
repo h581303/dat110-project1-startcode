@@ -1,9 +1,14 @@
 package no.hvl.dat110.rpc;
 
-// server-side (remote objects) must implement this interface
-
+/**
+ * Interface for RPC implementation classes
+ */
 public interface RPCImpl {
-	
-	byte[] invoke(byte[] request);
-	
+    /**
+     * Method for doing that which the classes that implements this method wants
+     *
+     * @param request Contains what the class is requested to do
+     * @return A response
+     */
+    byte[] invoke(byte[] request);
 }

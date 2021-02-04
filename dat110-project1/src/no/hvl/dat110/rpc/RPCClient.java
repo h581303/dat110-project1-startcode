@@ -4,13 +4,24 @@ import no.hvl.dat110.messaging.Connection;
 import no.hvl.dat110.messaging.Message;
 import no.hvl.dat110.messaging.MessagingClient;
 
+/**
+ * Defines a RPC client
+ *
+ * @author Sebastian Misje Jonassen
+ */
 public class RPCClient {
 
-    private MessagingClient msgclient;
+    private final MessagingClient MSG_CLIENT;
     private Connection connection;
 
+    /**
+     * Creates a new RPC client
+     *
+     * @param server
+     * @param port
+     */
     public RPCClient(String server, int port) {
-        msgclient = new MessagingClient(server, port);
+        MSG_CLIENT = new MessagingClient(server, port);
     }
 
     public void register(RPCStub remote) {
@@ -18,9 +29,7 @@ public class RPCClient {
     }
 
     public void connect() {
-
-        connection = msgclient.connect();
-
+        connection = MSG_CLIENT.connect();
     }
 
     public void disconnect() {
@@ -30,23 +39,12 @@ public class RPCClient {
     }
 
     public byte[] call(byte[] rpcrequest) {
-		
-		/* TODO: 
-		
-		Make a remote call on the RPC server by sending the RPC request message
-		and receive an RPC reply message
-		
-		rpcrequest is the marshalled rpcrequest from the client-stub
-		rpctreply is the rpcreply to be unmarshalled by the client-stub
-		
-		*/
 
         connection.send(new Message(rpcrequest));
 
         Message msg = connection.receive();
 
         return msg.getData();
-
     }
 
 }
