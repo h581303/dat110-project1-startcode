@@ -3,29 +3,40 @@ package no.hvl.dat110.messaging;
 import java.io.IOException;
 
 import java.net.Socket;
-import java.net.UnknownHostException;
 
+/**
+ * Defines a Messaging client
+ *
+ * @author Sebastian Misje Jonassen
+ */
 public class MessagingClient {
 
-	private String server;
-	private int port;
+	private final String SERVER;
+	private final int PORT;
 
+	/**
+	 * Creates a new Messaging client with the given server address and port
+	 *
+	 * @param server Server address
+	 * @param port The port the server is listening on
+	 */
 	public MessagingClient(String server, int port) {
-		this.server = server;
-		this.port = port;
+		SERVER = server;
+		PORT = port;
 	}
 
-	// connect to messaging server
+	/**
+	 * Tries to connect to the messaging server
+	 * by creating a TCP socket with the server address and port
+	 * then creating a new connection with the created socket
+	 *
+	 * @return A connection to the server
+	 */
 	public Connection connect() {
-
-		// TODO
-		// create TCP socket for client and connection
-		// create connection object
-		
 		Socket clientSocket = null;
 		
 		try {
-			clientSocket = new Socket(server, port);
+			clientSocket = new Socket(SERVER, PORT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

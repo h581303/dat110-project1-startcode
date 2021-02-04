@@ -4,33 +4,39 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Defines a messaging server
+ *
+ * @author Sebastian Misje Jonassen
+ */
 public class MessagingServer {
 
 	private ServerSocket welcomeSocket;
 
+	/**
+	 * Creates a new Messaging server object which is going to listen on the given port
+	 *
+	 * @param port The port which the server will listen to
+	 */
 	public MessagingServer(int port) {
-
 		try {
-
 			this.welcomeSocket = new ServerSocket(port);
 
 		} catch (IOException ex) {
-
 			System.out.println("Messaging server: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 	}
 
-	// accept an incoming connection from a client
+	/**
+	 * Accept an incoming connection from a messaging client
+	 *
+	 * @return A connection to the client
+	 */
 	public Connection accept() {
-
-		// TODO
-		// accept TCP connection on welcome socket and create messaging connection
-		
 		Socket connectionSocket;
 		Connection connection = null;
 
-		
 		try {
 			connectionSocket = welcomeSocket.accept();
 			
@@ -42,9 +48,11 @@ public class MessagingServer {
 		}
 
 		return connection;
-
 	}
 
+	/**
+	 * Stops the server
+	 */
 	public void stop() {
 
 		if (welcomeSocket != null) {

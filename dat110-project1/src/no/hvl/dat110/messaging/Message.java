@@ -1,5 +1,10 @@
 package no.hvl.dat110.messaging;
 
+/**
+ * Defines a message
+ *
+ * @author Sebastian Misje Jonassen
+ */
 public class Message {
 
     private byte[] payload;
