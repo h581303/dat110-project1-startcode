@@ -11,7 +11,7 @@ public class SensorImpl implements RPCImpl {
 
 		long seconds = System.currentTimeMillis();
 
-		double temp = RANGE * Math.sin(seconds / 1000);
+		double temp = RANGE * Math.sin(seconds / 1000.0);
 
 		return (int) Math.ceil(temp);
 	}
@@ -23,9 +23,7 @@ public class SensorImpl implements RPCImpl {
 		int temp = read();
 		
 		byte rpcid = request[0];
-		
-		byte[] reply = RPCUtils.marshallInteger(rpcid,temp); 
-		
-		return reply;
+
+		return RPCUtils.marshallInteger(rpcid,temp);
 	}
 }

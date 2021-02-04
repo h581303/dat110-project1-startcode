@@ -11,13 +11,13 @@ public class SensorDevice {
 		
 		SensorImpl sensor = new SensorImpl();
 		
-		RPCServer sensorserver = new RPCServer(Common.SENSORPORT);
+		RPCServer sensorServer = new RPCServer(Common.SENSOR_PORT);
 		
-	    sensorserver.register(1,sensor);
+	    sensorServer.register(1,sensor);
 		
-		sensorserver.run();
+		sensorServer.run();
 		
-		sensorserver.stop();
+		sensorServer.stop();
 		
 		System.out.println("Sensor server stopping ...");
 		
