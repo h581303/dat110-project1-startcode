@@ -5,17 +5,15 @@ import no.hvl.dat110.rpc.RPCUtils;
 
 public class TestBooleanBooleanStub extends RPCStub {
 
-	private byte RPCID = 4;
+	private final byte RPC_ID = 4;
 	
 	public boolean m(boolean b) {
 		
-		byte[] request = RPCUtils.marshallBoolean(RPCID,b);
+		byte[] request = RPCUtils.marshallBoolean(RPC_ID,b);
 		
-		byte[] reply = rpcclient.call(request);
-		
-		boolean bres = RPCUtils.unmarshallBoolean(reply);
-		
-		return bres;
+		byte[] reply = rpcClient.call(request);
+
+		return RPCUtils.unmarshallBoolean(reply);
 	}
 	
 }
