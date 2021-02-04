@@ -7,12 +7,14 @@ public class Sensor extends RPCStub {
 
     private final byte RPC_ID = 1;
 
+    /**
+     * Sends a rpc call to the sensor client to send the temperature
+     * back
+     *
+     * @return The temperature received from the sensor
+     */
     public int read() {
-
-        // TODO
-        // implement marshalling, call and unmarshalling for read RPC method
-
-        byte[] response = rpcclient.call(RPCUtils.marshallVoid(RPC_ID));
+        byte[] response = rpcClient.call(RPCUtils.marshallVoid(RPC_ID));
 
         return RPCUtils.unmarshallInteger(response);
     }

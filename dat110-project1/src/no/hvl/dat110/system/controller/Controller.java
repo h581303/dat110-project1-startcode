@@ -3,35 +3,27 @@ package no.hvl.dat110.system.controller;
 import no.hvl.dat110.rpc.RPCClient;
 import no.hvl.dat110.rpc.RPCServerStopStub;
 
+/**
+ * Defines a controller that talks to sensors and displays
+ */
 public class Controller {
 
-    private static int N = 5;
+    private static final int N = 5;
 
     public static void main(String[] args) {
-
-        Display display;
-        Sensor sensor;
-
-        RPCClient displayClient, sensorClient;
-
         System.out.println("Controller starting ...");
 
         RPCServerStopStub stopDisplay = new RPCServerStopStub();
         RPCServerStopStub stopSensor = new RPCServerStopStub();
 
-        displayClient = new RPCClient(Common.DISPLAY_HOST, Common.DISPLAY_PORT);
-        sensorClient = new RPCClient(Common.SENSOR_HOST, Common.SENSOR_PORT);
-
-        // TODO
-        // connect to sensor and display RPC servers
-        // create local display and sensor objects
-        // register display and sensor objects in the RPC layer
+        RPCClient displayClient = new RPCClient(Common.DISPLAY_HOST, Common.DISPLAY_PORT);
+        RPCClient sensorClient = new RPCClient(Common.SENSOR_HOST, Common.SENSOR_PORT);
 
         displayClient.connect();
         sensorClient.connect();
 
-        display = new Display();
-        sensor = new Sensor();
+        Display display = new Display();
+        Sensor sensor = new Sensor();
 
         sensorClient.register(sensor);
         displayClient.register(display);
@@ -40,17 +32,14 @@ public class Controller {
         displayClient.register(stopDisplay);
         sensorClient.register(stopSensor);
 
-        // TODO:
-        // loop while reading from sensor and write to display via RPC
-
-		for (int i = 0; i < 5; i++) {
-			display.write(sensor.read() + "");
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+        for (int i = 0; i < N; i++) {
+            display.write(sensor.read() + "");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         stopDisplay.stop();
         stopSensor.stop();
@@ -59,6 +48,5 @@ public class Controller {
         sensorClient.disconnect();
 
         System.out.println("Controller stopping ...");
-
     }
 }

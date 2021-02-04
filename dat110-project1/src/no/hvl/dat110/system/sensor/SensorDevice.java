@@ -3,6 +3,9 @@ package no.hvl.dat110.system.sensor;
 import no.hvl.dat110.rpc.RPCServer;
 import no.hvl.dat110.system.controller.Common;
 
+/**
+ * Simulates a sensor server
+ */
 public class SensorDevice {
 
 	public static void main(String[] args) {
