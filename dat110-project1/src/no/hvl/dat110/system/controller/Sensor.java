@@ -9,6 +9,7 @@ public class Sensor extends RPCStub {
 	public int read() {
 		
 		int temp = 0;
+		//T
 		
 		// TODO
 		// implement marshalling, call and unmarshalling for read RPC method
