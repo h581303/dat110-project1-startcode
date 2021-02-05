@@ -24,7 +24,7 @@ public class DisplayImpl implements RPCImpl {
 		write(str);
 		
 		
-		reply = RPCUtils.marshallString(rpcid,str); 
+		reply = RPCUtils.marshallVoid(rpcid); 
 		
 		return reply;
 	}

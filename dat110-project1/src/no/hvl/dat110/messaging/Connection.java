@@ -36,21 +36,11 @@ public class Connection {
 		
 
 		
-		try {
-
-			outStream.write(message.encapsulate());
-			outStream.flush();
-
-		} catch (IOException e) {
-
-			message.encapsulate();
-			try {
-				outStream.write(message.getData());
-			} catch (IOException e2) {
-				e.printStackTrace();
-			}
-
-		}
+	       try {
+	            outStream.write(message.encapsulate());
+	        } catch (IOException e) {
+	            System.err.println(e.getMessage());
+	        }
 
 	}
 

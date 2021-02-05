@@ -53,6 +53,13 @@ public class Controller  {
 			  int temp = sensor.read();
 			  display.write(Integer.toString(temp));
 
+			  try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			  
 			}
 		
 
