@@ -29,20 +29,11 @@ public class RPCClient {
 	
 	public byte[] call(byte[] rpcrequest) {
 		
-		/* TODO: 
-		
-		Make a remote call on the RPC server by sending the RPC request message
-		and receive an RPC reply message
-		
-		rpcrequest is the marshalled rpcrequest from the client-stub
-		rpctreply is the rpcreply to be unmarshalled by the client-stub
-		
-		*/
 
 		try {
 			connection.send(new Message(rpcrequest));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
